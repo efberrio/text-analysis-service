@@ -4,6 +4,10 @@ import com.appgate.textanalysis.data.dto.TextAlgorithmDTO;
 import com.appgate.textanalysis.data.entity.TextAlgorithm;
 import com.appgate.textanalysis.data.enumeration.StateEnum;
 
+/**
+ * Convert TextAlgorithmDTO to TextAlgorithm and viceversa.
+ * @author Fabio Berrio
+ */
 public class TextAlgorithmFactory {
 	
 	public static TextAlgorithmDTO convertEntityToDTO(TextAlgorithm textAlgorithm) {

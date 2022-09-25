@@ -17,6 +17,10 @@ import com.appgate.textanalysis.service.TextAnalysisService;
 import com.appgate.textanalysis.service.algorithm.TextAnalyzer;
 import com.appgate.textanalysis.service.algorithm.TextAnalyzerFactory;
 
+/**
+ * Service implementation for text analysis.
+ * @author Fabio Berrio
+ */
 @Service
 public class TextAnalysisServiceImpl implements TextAnalysisService {
 	

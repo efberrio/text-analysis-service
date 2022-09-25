@@ -3,9 +3,8 @@ package com.appgate.textanalysis.data.enumeration;
 import java.util.Arrays;
 
 /**
- * Represents the state of an object.
+ * Represent the state of an object.
  * @author Fabio Berrio
- *
  */
 public enum StateEnum {
 	ACTIVE("A"),

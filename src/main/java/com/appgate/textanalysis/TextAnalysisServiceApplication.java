@@ -17,6 +17,11 @@ public class TextAnalysisServiceApplication {
 		SpringApplication.run(TextAnalysisServiceApplication.class, args);
 	}
 
+	/**
+	 * Add text analysis algorithms for dev and integrationtest profiles.
+	 * @param service
+	 * @return
+	 */
 	@Bean
 	@Profile(value = {"dev", "integrationtest"})
     public CommandLineRunner sampleData(TextAnalysisService service) {

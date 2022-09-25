@@ -29,7 +29,7 @@ class TextAnalysisControllerTest {
 
 	@Test
 	public void givenNoParameters_whenGetTextAlgorithms_thenReturnTextAlgorithms() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.get("/textalgorithms").accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(MockMvcRequestBuilders.get("/api/textalgorithms").accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk()).andReturn();
 	}
 
@@ -42,7 +42,7 @@ class TextAnalysisControllerTest {
 		String input = objectMapper.writeValueAsString(textCriteriaDTO);
 		Integer expectedResult = 5;
 		
-		mockMvc.perform(MockMvcRequestBuilders.post("/textalgorithms/distinctSubsequences/analyze").contentType(MediaType.APPLICATION_JSON)
+		mockMvc.perform(MockMvcRequestBuilders.post("/api/textalgorithms/distinctSubsequences/analyze").contentType(MediaType.APPLICATION_JSON)
 				.content(input).accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk()).andExpect(jsonPath("$.result", is(expectedResult)));
 	}
 
@@ -54,7 +54,7 @@ class TextAnalysisControllerTest {
 		ObjectMapper objectMapper = new ObjectMapper();
 		String input = objectMapper.writeValueAsString(textCriteriaDTO);
 		
-		mockMvc.perform(MockMvcRequestBuilders.post("/textalgorithms/invalid/analyze").contentType(MediaType.APPLICATION_JSON)
+		mockMvc.perform(MockMvcRequestBuilders.post("/api/textalgorithms/invalid/analyze").contentType(MediaType.APPLICATION_JSON)
 				.content(input).accept(MediaType.APPLICATION_JSON)).andExpect(status().isBadRequest());
 	}
 

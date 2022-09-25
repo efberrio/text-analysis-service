@@ -5,11 +5,16 @@ import org.springframework.stereotype.Component;
 import com.appgate.textanalysis.data.dto.TextCriteriaDTO;
 import com.appgate.textanalysis.service.algorithm.TextAnalyzer;
 
+/**
+ * Implementation of Distinct Subsequences algorithm.
+ * @author Fabio Berrio
+ */
 @Component(value = "distinctSubsequences")
 public class DistinctSubsequencesAnalyzer implements TextAnalyzer {
 
 	@Override
 	public int analyze(TextCriteriaDTO textCriteriaDTO) {
+		// Uses Dynamic Programming to optimize memory and traversal
 		String source = textCriteriaDTO.getSource();
 		String textToSearch = textCriteriaDTO.getTextToSearch();
 		int sourceLength = source.length();

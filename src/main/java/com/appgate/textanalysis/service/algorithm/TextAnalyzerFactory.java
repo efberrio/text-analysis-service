@@ -7,6 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
+/**
+ * Factory for retrieving a text analyzer based on an algorithm type. 
+ * Each text analyzer must be a Component with a name specifying the 
+ * algorithm type.
+ * @author Fabio Berrio
+ */
 @Component
 public class TextAnalyzerFactory {
 	private final Logger logger = LoggerFactory.getLogger(TextAnalyzerFactory.class);

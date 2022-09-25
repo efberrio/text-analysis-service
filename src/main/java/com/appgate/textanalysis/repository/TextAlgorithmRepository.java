@@ -7,6 +7,10 @@ import org.springframework.stereotype.Repository;
 
 import com.appgate.textanalysis.data.entity.TextAlgorithm;
 
+/**
+ * JPA repository for TextAlgorithm.
+ * @author Fabio Berrio
+ */
 @Repository
 public interface TextAlgorithmRepository extends JpaRepository<TextAlgorithm, Long> {
 	TextAlgorithm findByCode(String code);
