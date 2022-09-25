@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AlgorithmDTO implements Serializable {
+public class TextAlgorithmDTO implements Serializable {
 	private static final long serialVersionUID = 3053829514537266018L;
 	
 	private String code;

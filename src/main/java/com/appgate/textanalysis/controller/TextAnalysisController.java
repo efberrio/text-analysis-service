@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.appgate.textanalysis.data.dto.AlgorithmDTO;
+import com.appgate.textanalysis.data.dto.TextAlgorithmDTO;
 import com.appgate.textanalysis.data.dto.TextAnalysisResultDTO;
-import com.appgate.textanalysis.data.dto.TextPairDTO;
+import com.appgate.textanalysis.data.dto.TextCriteriaDTO;
 import com.appgate.textanalysis.service.TextAnalysisService;
 
 @RestController
@@ -23,14 +23,14 @@ public class TextAnalysisController {
 	@Autowired
 	private TextAnalysisService textAnalysisService;
 	
-	@GetMapping(value = "/algorithms", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<AlgorithmDTO> getAlgorithms() {
-		return textAnalysisService.getAlgorithms();
+	@GetMapping(value = "/textalgorithms", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<TextAlgorithmDTO> getTextAlgorithms() {
+		return textAnalysisService.getTextAlgorithms();
 	}
 	
-	@PostMapping(value = "/algorithms/{algorithmCode}/analyze", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<TextAnalysisResultDTO> analyzeText(@PathVariable("algorithmCode") String algorithmCode, @RequestBody TextPairDTO textPairDTO) {
-		TextAnalysisResultDTO resultDTO = textAnalysisService.analyzeText(algorithmCode, textPairDTO);
+	@PostMapping(value = "/textalgorithms/{algorithmCode}/analyze", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<TextAnalysisResultDTO> analyzeText(@PathVariable("algorithmCode") String algorithmCode, @RequestBody TextCriteriaDTO textCriteriaDTO) {
+		TextAnalysisResultDTO resultDTO = textAnalysisService.analyzeText(algorithmCode, textCriteriaDTO);
 		if (resultDTO != null) {
 			return new ResponseEntity<TextAnalysisResultDTO>(resultDTO, HttpStatus.OK);
 		} else {
