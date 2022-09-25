@@ -9,12 +9,10 @@
 
 name: Deploy to Amazon ECS
 
-# Only trigger, when the build workflow succeeded
-on:
-  workflow_run:
-    workflows: ["Continuous Integration"]
-    types:
-      - completed
+on: [push]
+
+#on:
+#  push:
 #    branches:
 #      - main
 
