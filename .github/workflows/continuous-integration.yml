@@ -14,4 +14,4 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
       - name: Build and Test with Maven
-        run: mvn -B -U package -P integrationtest
+        run: mvn -B -U package verify -P integrationtest
