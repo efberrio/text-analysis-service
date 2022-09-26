@@ -43,11 +43,16 @@ public class TextAnalysisServiceImpl implements TextAnalysisService {
 	
 	@Override
 	public TextAnalysisResultDTO analyzeText(String algorithmCode, TextCriteriaDTO textCriteriaDTO) {
-		TextAnalyzer textAnalyzer = factory.getTextAnalyzer(algorithmCode);
-		if (textAnalyzer != null) {
-			int result = textAnalyzer.analyze(textCriteriaDTO);
-			TextAnalysisResultDTO resultDTO = new TextAnalysisResultDTO(result);
-			return resultDTO;
+		// Verify if the algorithm exists is active
+		TextAlgorithm textAlgorithm = textAlgorithmRepository.findByCode(algorithmCode);
+		if (textAlgorithm != null && StateEnum.ACTIVE.getValue().equals(textAlgorithm.getState())) {
+			// Get the algorithm and execute it
+			TextAnalyzer textAnalyzer = factory.getTextAnalyzer(algorithmCode);
+			if (textAnalyzer != null) {
+				int result = textAnalyzer.analyze(textCriteriaDTO);
+				TextAnalysisResultDTO resultDTO = new TextAnalysisResultDTO(result);
+				return resultDTO;
+			}
 		}
 		return null;
 	}
