@@ -19,7 +19,7 @@ import com.appgate.textanalysis.service.algorithm.TextAnalyzerFactory;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @ActiveProfiles("integrationtest")
-public class DistinctSubsequencesAnalyzerTest {
+class DistinctSubsequencesAnalyzerTest {
 	
 	@Autowired
 	private TextAnalyzerFactory textAnalyzerFactory;
