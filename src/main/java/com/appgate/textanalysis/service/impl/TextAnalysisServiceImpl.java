@@ -60,8 +60,7 @@ public class TextAnalysisServiceImpl implements TextAnalysisService {
 			// Get the algorithm and execute it
 			TextAnalyzer textAnalyzer = factory.getTextAnalyzer(algorithmCode);
 			if (textAnalyzer != null) {
-				int result = textAnalyzer.analyze(textCriteriaDTO);
-				TextAnalysisResultDTO resultDTO = new TextAnalysisResultDTO(result);
+				TextAnalysisResultDTO resultDTO = textAnalyzer.analyze(textCriteriaDTO);
 				return resultDTO;
 			}
 		}

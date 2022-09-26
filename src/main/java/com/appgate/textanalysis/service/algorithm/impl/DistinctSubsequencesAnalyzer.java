@@ -2,6 +2,7 @@ package com.appgate.textanalysis.service.algorithm.impl;
 
 import org.springframework.stereotype.Component;
 
+import com.appgate.textanalysis.data.dto.TextAnalysisResultDTO;
 import com.appgate.textanalysis.data.dto.TextCriteriaDTO;
 import com.appgate.textanalysis.service.algorithm.TextAnalyzer;
 
@@ -13,7 +14,7 @@ import com.appgate.textanalysis.service.algorithm.TextAnalyzer;
 public class DistinctSubsequencesAnalyzer implements TextAnalyzer {
 
 	@Override
-	public int analyze(TextCriteriaDTO textCriteriaDTO) {
+	public TextAnalysisResultDTO analyze(TextCriteriaDTO textCriteriaDTO) {
 		// Uses Dynamic Programming to optimize memory and traversal
 		String source = textCriteriaDTO.getSource();
 		String textToSearch = textCriteriaDTO.getTextToSearch();
@@ -30,7 +31,7 @@ public class DistinctSubsequencesAnalyzer implements TextAnalyzer {
 
 			}
 		}
-		return previous[queryLength];
+		return new TextAnalysisResultDTO(previous[queryLength]);
 	}
 
 }

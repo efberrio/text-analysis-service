@@ -1,4 +1,4 @@
-package com.appgate.textanalysis.service;
+package com.appgate.textanalysis.service.algorithm.impl;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -13,23 +13,29 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.appgate.textanalysis.data.dto.TextAnalysisResultDTO;
 import com.appgate.textanalysis.data.dto.TextCriteriaDTO;
+import com.appgate.textanalysis.service.algorithm.TextAnalyzer;
+import com.appgate.textanalysis.service.algorithm.TextAnalyzerFactory;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @ActiveProfiles("integrationtest")
-class TextAnalysisServiceTest {
-
+public class DistinctSubsequencesAnalyzerTest {
+	
 	@Autowired
-	private TextAnalysisService textAnalysisService;
+	private TextAnalyzerFactory textAnalyzerFactory;
 	
 	@ParameterizedTest
 	@CsvSource({"this is an input sample,sam,5", "rabbbit,rabit,3", "babgbag,bag,5", "ABCDE,ACE,1"})
-	public void givenDistinctSubsequencesAlgorithm_whenAnalyze_thenReturnResult(String source, String textToSearch, Integer expectedResult) throws Exception {
+	public void givenTextToAnalyze_whenAnalyze_thenReturnResult(String source, String textToSearch, Integer expectedResult) throws Exception {
 		TextCriteriaDTO textCriteriaDTO = new TextCriteriaDTO();
 		textCriteriaDTO.setSource(source);
 		textCriteriaDTO.setTextToSearch(textToSearch);
 		
-		TextAnalysisResultDTO resultDTO = textAnalysisService.analyzeText("distinctSubsequences", textCriteriaDTO);
+		TextAnalyzer textAnalyzer = textAnalyzerFactory.getTextAnalyzer("distinctSubsequences");
+		assertNotNull(textAnalyzer);
+		textAnalyzer.analyze(textCriteriaDTO);
+		
+		TextAnalysisResultDTO resultDTO = textAnalyzer.analyze(textCriteriaDTO);
 		assertNotNull(resultDTO);
 		assertEquals(expectedResult, resultDTO.getResult());
 	}

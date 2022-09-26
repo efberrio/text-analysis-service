@@ -1,5 +1,6 @@
 package com.appgate.textanalysis.service.algorithm;
 
+import com.appgate.textanalysis.data.dto.TextAnalysisResultDTO;
 import com.appgate.textanalysis.data.dto.TextCriteriaDTO;
 
 /**
@@ -9,10 +10,10 @@ import com.appgate.textanalysis.data.dto.TextCriteriaDTO;
 public interface TextAnalyzer {
 
 	/**
-	 * Analyze a text and return an int as a result.
+	 * Analyze a text and return a result.
 	 * @param textCriteriaDTO
 	 * @return
 	 */
-	int analyze(TextCriteriaDTO textCriteriaDTO);
+	TextAnalysisResultDTO analyze(TextCriteriaDTO textCriteriaDTO);
 	
 }

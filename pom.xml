@@ -98,6 +98,7 @@
 				<configuration>
 					<excludes>
 						<exclude>com/appgate/textanalysis/data/**/*</exclude>
+						<exclude>com/appgate/textanalysis/service/algorithm/*</exclude>
 						<exclude>com/appgate/textanalysis/repository/**/*</exclude>
 						<exclude>com/appgate/textanalysis/*Application*</exclude>
 					</excludes>
