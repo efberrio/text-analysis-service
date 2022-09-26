@@ -34,8 +34,8 @@ public interface TextAnalysisService {
 	/**
 	 * Analyze the text using the specified algorithm.
 	 * @param algorithmCode
-	 * @param textPairDTO
+	 * @param textCriteriaDTO
 	 * @return
 	 */
-	TextAnalysisResultDTO analyzeText(String algorithmCode, TextCriteriaDTO textPairDTO);
+	TextAnalysisResultDTO analyzeText(String algorithmCode, TextCriteriaDTO textCriteriaDTO);
 }
