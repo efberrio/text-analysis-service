@@ -3,6 +3,7 @@ package com.appgate.textanalysis;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
 
@@ -11,6 +12,7 @@ import com.appgate.textanalysis.data.enumeration.StateEnum;
 import com.appgate.textanalysis.service.TextAnalysisService;
 
 @SpringBootApplication
+@EnableCaching
 public class TextAnalysisServiceApplication {
 
 	public static void main(String[] args) {

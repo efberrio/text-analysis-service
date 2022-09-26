@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.appgate.textanalysis.data.dto.TextAlgorithmDTO;
 import com.appgate.textanalysis.data.dto.TextAnalysisResultDTO;
 import com.appgate.textanalysis.data.dto.TextCriteriaDTO;
+import com.appgate.textanalysis.service.CacheTextAlgorithmService;
 import com.appgate.textanalysis.service.TextAnalysisService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -34,6 +36,9 @@ public class TextAnalysisController {
 	
 	@Autowired
 	private TextAnalysisService textAnalysisService;
+	
+	@Autowired
+	private CacheTextAlgorithmService cacheTextAlgorithmService;
 	
 	@GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@Operation(summary = "Get the active text algorithms")
@@ -57,6 +62,16 @@ public class TextAnalysisController {
 		} else {
 			return new ResponseEntity<TextAnalysisResultDTO>(HttpStatus.BAD_REQUEST);
 		}
+	}
+
+	@PatchMapping(value = "/resetCache", produces = MediaType.APPLICATION_JSON_VALUE)
+	@Operation(summary = "Reset the cached text algorithm definitions")
+	@ApiResponses(value = {
+	  @ApiResponse(responseCode = "200", description = "Cache reseted"),
+	  })
+	public ResponseEntity<Void> resetCache() {
+		cacheTextAlgorithmService.resetCache();
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 }
