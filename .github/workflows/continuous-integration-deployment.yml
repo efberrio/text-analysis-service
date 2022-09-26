@@ -7,7 +7,7 @@
 # To get a newer version, you will need to update the SHA.
 # You can also reference a tag or branch, but the action may change without warning.
 
-name: Deploy to Amazon ECS
+name: Build, Test and Deploy to Amazon ECS
 
 on: [push]
 
@@ -40,9 +40,14 @@ jobs:
           distribution: 'adopt'
       - name: Build and Test with Maven
         run: mvn -B -U package verify -P integrationtest
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Package
+          path: staging
 
   deploy:
     name: Deploy
+    needs: build
     runs-on: ubuntu-latest
     environment: prod
 
