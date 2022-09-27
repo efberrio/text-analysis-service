@@ -13,6 +13,7 @@ import com.appgate.textanalysis.data.entity.TextAlgorithm;
 import com.appgate.textanalysis.data.enumeration.StateEnum;
 import com.appgate.textanalysis.data.factory.TextAlgorithmFactory;
 import com.appgate.textanalysis.repository.TextAlgorithmRepository;
+import com.appgate.textanalysis.service.CacheTextAlgorithmService;
 import com.appgate.textanalysis.service.TextAnalysisService;
 import com.appgate.textanalysis.service.algorithm.TextAnalyzer;
 import com.appgate.textanalysis.service.algorithm.TextAnalyzerFactory;
@@ -30,6 +31,9 @@ public class TextAnalysisServiceImpl implements TextAnalysisService {
 	@Autowired
 	private TextAnalyzerFactory factory;
 	
+	@Autowired
+	private CacheTextAlgorithmService cacheTextAlgorithmService;
+	
 	@Override
 	public List<TextAlgorithmDTO> getTextAlgorithms() {
 		List<TextAlgorithm> textAlgorithms = textAlgorithmRepository.findByState(StateEnum.ACTIVE.getValue());
@@ -37,17 +41,28 @@ public class TextAnalysisServiceImpl implements TextAnalysisService {
 	}
 	
 	@Override
+	public TextAlgorithmDTO getTextAlgorithmByCode(String code) {
+		TextAlgorithm textAlgorithm = textAlgorithmRepository.findByCode(code);
+		return TextAlgorithmFactory.convertEntityToDTO(textAlgorithm);
+	}
+
+	@Override
 	public void addTextAlgorithm(TextAlgorithmDTO textAlgorithmDTO) {
 		textAlgorithmRepository.save(TextAlgorithmFactory.convertDTOToEntity(textAlgorithmDTO));
 	}
 	
 	@Override
 	public TextAnalysisResultDTO analyzeText(String algorithmCode, TextCriteriaDTO textCriteriaDTO) {
-		TextAnalyzer textAnalyzer = factory.getTextAnalyzer(algorithmCode);
-		if (textAnalyzer != null) {
-			int result = textAnalyzer.analyze(textCriteriaDTO);
-			TextAnalysisResultDTO resultDTO = new TextAnalysisResultDTO(result);
-			return resultDTO;
+		// Verify if the algorithm exists and is active
+		// Use cache service for optimization
+		TextAlgorithmDTO textAlgorithmDTO = cacheTextAlgorithmService.getTextAlgorithmByCode(algorithmCode);
+		if (textAlgorithmDTO != null && StateEnum.ACTIVE.equals(textAlgorithmDTO.getState())) {
+			// Get the algorithm and execute it
+			TextAnalyzer textAnalyzer = factory.getTextAnalyzer(algorithmCode);
+			if (textAnalyzer != null) {
+				TextAnalysisResultDTO resultDTO = textAnalyzer.analyze(textCriteriaDTO);
+				return resultDTO;
+			}
 		}
 		return null;
 	}

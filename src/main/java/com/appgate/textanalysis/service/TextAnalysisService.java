@@ -19,6 +19,13 @@ public interface TextAnalysisService {
 	List<TextAlgorithmDTO> getTextAlgorithms();
 	
 	/**
+	 * Get a text algorithm by code.
+	 * @param code
+	 * @return
+	 */
+	TextAlgorithmDTO getTextAlgorithmByCode(String code);
+	
+	/**
 	 * Add a text algorithm.
 	 * @param textAlgorithmDTO
 	 */
@@ -27,8 +34,8 @@ public interface TextAnalysisService {
 	/**
 	 * Analyze the text using the specified algorithm.
 	 * @param algorithmCode
-	 * @param textPairDTO
+	 * @param textCriteriaDTO
 	 * @return
 	 */
-	TextAnalysisResultDTO analyzeText(String algorithmCode, TextCriteriaDTO textPairDTO);
+	TextAnalysisResultDTO analyzeText(String algorithmCode, TextCriteriaDTO textCriteriaDTO);
 }

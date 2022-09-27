@@ -58,4 +58,10 @@ class TextAnalysisControllerTest {
 				.content(input).accept(MediaType.APPLICATION_JSON)).andExpect(status().isBadRequest());
 	}
 
+	@Test
+	public void givenNoParameters_whenResetCache_thenReturnOK() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.patch("/api/textalgorithms/resetCache").accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk()).andReturn();
+	}
+
 }

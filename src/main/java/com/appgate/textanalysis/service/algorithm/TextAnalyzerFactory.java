@@ -20,6 +20,11 @@ public class TextAnalyzerFactory {
 	@Autowired
     private ApplicationContext applicationContext;
 	
+	/**
+	 * Get the text analyzer for the specified algorithm type.
+	 * @param algorithmType
+	 * @return
+	 */
 	public TextAnalyzer getTextAnalyzer(String algorithmType) {
 		if (algorithmType != null && !algorithmType.isEmpty()) {
 			try {
